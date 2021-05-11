@@ -32,6 +32,8 @@ ChatBot::ChatBot(std::string filename)
 
 // Copy Contructor
 ChatBot::ChatBot(const ChatBot& other) {
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    
     _chatLogic = other._chatLogic;
     _rootNode = other._rootNode;
     *_image = *other._image;
@@ -39,6 +41,8 @@ ChatBot::ChatBot(const ChatBot& other) {
 
 // Move Contructor
 ChatBot::ChatBot(ChatBot&& other) {
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    
     _chatLogic = other._chatLogic;
     other._chatLogic = nullptr;
     _rootNode = other._rootNode;    
@@ -51,12 +55,16 @@ ChatBot::ChatBot(ChatBot&& other) {
 
 // Copy Assigment Operator
 ChatBot& ChatBot::operator=(const ChatBot& other){
+    std::cout << "ChatBot Copy Assigment Operator" << std::endl;
+    
     return *this = ChatBot(other);
 }
 
 // Move Assigment Operator
 ChatBot& ChatBot::operator=(ChatBot&& other)
 {
+    std::cout << "ChatBot Move Assigment Operator" << std::endl;
+    
     std::swap(_chatLogic, other._chatLogic);
     std::swap(_rootNode, other._rootNode);
     *_image = *other._image;
