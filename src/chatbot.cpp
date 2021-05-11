@@ -37,6 +37,7 @@ ChatBot::ChatBot(const ChatBot& other) {
     _chatLogic = other._chatLogic;
     _rootNode = other._rootNode;
     *_image = *other._image;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 // Move Contructor
@@ -47,10 +48,8 @@ ChatBot::ChatBot(ChatBot&& other) {
     other._chatLogic = nullptr;
     _rootNode = other._rootNode;    
     other._rootNode = nullptr;
-    *_image = *other._image;
-    if (other._image != NULL) {
-        delete other._image;
-    }
+    _image = other._image;
+    other._image = NULL;
 }
 
 // Copy Assigment Operator
@@ -67,10 +66,9 @@ ChatBot& ChatBot::operator=(ChatBot&& other)
     
     std::swap(_chatLogic, other._chatLogic);
     std::swap(_rootNode, other._rootNode);
-    *_image = *other._image;
-    if (other._image != NULL) {
-        delete other._image;
-    }
+    _image = other._image;
+    other._image = NULL;
+    _chatLogic->SetChatbotHandle(this);
     return *this;
 }   
 
